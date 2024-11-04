@@ -1,7 +1,5 @@
 
 
----
-
 # 🥷 Ninja-Interviewer
 
 **Ninja-Interviewer** is a web application that generates tailored interview questions based on a provided job description. It’s designed to help recruiters, hiring managers, and even candidates by delivering role-specific interview questions, enhancing interview preparedness with ease and precision.
@@ -102,4 +100,3 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 **Ninja-Interviewer** – Taking the guesswork out of interview prep with smart, customizable questions!
 
----
