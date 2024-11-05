@@ -17,7 +17,7 @@
 
 ## 🎬 Demo
 
-Check out a live demo of Ninja-Interviewer (add link here if available).
+Check out a live demo of Ninja-Interviewer (We will be live soon).
 
 ---
 
@@ -89,7 +89,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Twitter**: [@NinjaInterviewer](https://twitter.com/ninjainterviewer)
 - **LinkedIn**: [Ninja Interviewer](https://linkedin.com/in/ninjainterviewer)
-
+- We'll be coming live soon!
 ---
 
 ### 🙌 Contributing
