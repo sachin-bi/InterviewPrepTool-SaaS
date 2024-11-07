@@ -7,12 +7,17 @@
     Dark Background: The navbar background (bg-gray-900) keeps the theme consistent.
     Accent Colors: Text links change to yellow on hover to match the "ninja" theme.
     Button: The "Get Started" button is prominent, with bright yellow to draw attention against the dark background.
-4. 
 
 
-This is job description starts with $$$ and ends with $$$:$$$for post of sde 2 engineer at google $$$
+## sign up - route - next auth
+4. Create 2 files /api/auth/[...nextauth] -> route.ts and options.ts
+5. in options set the provider, and page, callbacks, nextauth_secret in .env
+6. after that set up the middleware first
+7. after that set up the context authProvider (wrap body with this in main layout)
 
-Create a list of ten questions formatted as a single string. Each question should be separated by '||'. These questions which might be asked in this interview , and should be suitable for this interview. Avoid sensitive topics, focusing instead on interview . For example, your output should be structured like this in single string: ' General:|| Tell us a little bit about yourself and your academic background.|| What are your career goals and why are you interested in P360?|| What are your biggest strengths and weaknesses?|| How do you stay up-to-date with new technologies in your field?|| Technical:|| Explain your understanding of basic SQL concepts.|| Briefly explain the concept of cloud computing.|| How would you approach solving a logical reasoning problem?|| Can you share an example of a puzzle or game you enjoy and why?|| Describe your comfort level with basic math operations.|| Behavioral:|| How do you communicate technical information to non-technical people?|| Describe a time you worked effectively in a team, especially when facing challenges or disagreements. ' Ensure the questions are based on job description provided above.
+## write the dependencies installed:
+8. npm installed -axios react-hook-form   usehooks-ts  shadcn@latest add form  shadcn@latest add form
+9. 
 
 
 

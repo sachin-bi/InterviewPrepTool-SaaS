@@ -2,7 +2,7 @@
 
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
-import Head from 'next/head';
+// import Head from 'next/head';
 import { useState } from 'react';
 
 export default function GeneratePage() {
@@ -50,9 +50,9 @@ export default function GeneratePage() {
 
     return (
         <>
-            <Head>
+            {/* <Head>
                 <title>Get Interview Questions | Ninja-Interviewer</title>
-            </Head>
+            </Head> */}
             <Navbar />
             <main className="min-h-screen bg-gray-900 text-gray-200 py-8 px-4">
 

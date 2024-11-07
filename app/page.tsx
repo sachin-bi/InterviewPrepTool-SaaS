@@ -1,14 +1,14 @@
 import Navbar from '@/components/Navbar';
-import Head from 'next/head';
+// import Head from 'next/head';
 import Link from 'next/link';
 
 export default function LandingPage() {
   return (
     <>
     <Navbar/>
-      <Head>
+      {/* <Head>
         <title>Ninja Interviewer | Smart Interview Questions</title>
-      </Head>
+      </Head> */}
       <main className="flex flex-col items-center min-h-screen bg-gray-900 text-gray-200">
         {/* Hero Section */}
         <section className="w-full bg-gray-800 py-16 px-4 text-center">

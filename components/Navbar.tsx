@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
+
+
 export default function Navbar() {
     const [navOpen, setNavOpen] = useState(false);
 
