@@ -61,6 +61,7 @@ export default function page() {
     }
 
     if (result?.url) {
+      // router.push('/get-my-questions')
       router.replace('/get-my-questions')
     }
     setIsSubmitting(false)

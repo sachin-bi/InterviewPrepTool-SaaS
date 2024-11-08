@@ -1,6 +1,3 @@
-// export { auth as middleware } from "@/auth"
-
-// import type { NextRequest } from 'next/server'
 import { NextRequest, NextResponse } from "next/server";
 export { default } from "next-auth/middleware"; // by default attach mw to all pages
 import { getToken } from "next-auth/jwt"; // to get token
@@ -23,16 +20,16 @@ export async function middleware(request: NextRequest) {
 
   if (
     token &&
-    (url.pathname.startsWith("/sign-in") ||
-      url.pathname.startsWith("/sign-up") ||
-      url.pathname === "/")
+    (url.pathname.startsWith("/sign-in") || url.pathname.startsWith("/sign-up"))
+    // ||url.pathname === "/"
   ) {
     return NextResponse.redirect(new URL("/get-my-questions", request.url));
   }
 
   if (
-    (!token && url.pathname.startsWith("/dashboard")) ||
-    url.pathname.startsWith("/get-my-questions")
+    !token &&
+    (url.pathname.startsWith("/dashboard") ||
+      url.pathname.startsWith("/get-my-questions"))
   ) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }

@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"; //if fb, gith
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
+import { use } from "react";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -10,7 +11,7 @@ export const authOptions: NextAuthOptions = {
       id: "credentials",
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "jsmith" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any): Promise<any> {
@@ -21,10 +22,12 @@ export const authOptions: NextAuthOptions = {
           const user = await UserModel.findOne({
             $or: [
               //TODO: LOOK in login u can provide both username or email
-              { email: credentials.identifier.email },
-              { username: credentials.identifier.username },
+              { email: credentials.identifier },
+              { username: credentials.identifier },
             ],
           });
+          console.log("---droping from auth Options..user::",user)
+          console.log("---droping from auth Options..credentials::",credentials)
 
           if (!user) {
             throw new Error("No user found with this email!");
