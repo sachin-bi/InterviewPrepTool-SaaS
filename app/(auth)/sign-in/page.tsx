@@ -51,12 +51,21 @@ export default function page() {
       password: data.password
     })
     console.log("-- result value from @signIn/page", result)
-
+    toast({
+      title: 'Login Failed!',
+      description: "Incorrect Username/email/error.!",
+      // variant: "destructive"
+    })
+    //TODO: imp!! fix this toast its not working // look toast provider too
     if (result?.error) {
+      console.log(
+        "Login Failed! - Incorrect Username/email/error.!"
+      );
+
       toast({
         title: 'Login Failed!',
         description: "Incorrect Username/email/error.!",
-        variant: "destructive"
+        // variant: "destructive"
       })
     }
 

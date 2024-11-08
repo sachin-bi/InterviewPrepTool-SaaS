@@ -1,19 +1,37 @@
 "use client"
+// TODO: in this page implement use form "maintain consistency"
+
 
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
 // import Head from 'next/head';
 import { useState } from 'react';
 
+import { useSession } from "next-auth/react"
+import { User } from "next-auth"
+
+
 export default function GeneratePage() {
+
     const [jobDescription, setJobDescription] = useState<string>('');
+    const [isLoading, setIsLoading] = useState(false)
+    const [interviewQuestions, setInterviewQuestions] = useState<InterviewQuestion[]>([
+        // {content: "Questions appear here!"}
+    ]);
+    const { data: session } = useSession()
+
+    if (!session || !session.user) {
+        return <div className='bg-slate-300 m-4'>Please login, or let ur session load</div>
+    }
+    //show username feild link
+    const { username, isSubscribed, queryLeft , _id} = session?.user as User
+    //TODO: remove id if not used!
+
+
     interface InterviewQuestion {
         content: string;
     }
 
-    const [interviewQuestions, setInterviewQuestions] = useState<InterviewQuestion[]>([
-        
-    ]);
 
 
     const handleGenerateQuestions = async () => {
@@ -24,42 +42,21 @@ export default function GeneratePage() {
             content: "We will be back soon.!:"
         });
 
-
-        // console.log("--api response::", response.data.messages);
-        // console.log("--jd::",jobDescription);
-
-
-        // Dummy generation logic (replace this with actual API call)
-        // if (jobDescription.trim()) {
-        //     setInterviewQuestions([
-        //         "Tell us about your experience with similar roles.",
-        //         "How would you handle the key responsibilities in this job?",
-        //         "What makes you a good fit for this role?",
-        //         "How do you approach problem-solving in challenging scenarios?",
-        //         "What skills do you bring to this position?",
-        //         "Describe a situation where you demonstrated leadership.",
-        //         "How do you stay updated with industry trends?",
-        //         "How would you tackle a difficult project under tight deadlines?",
-        //         "What motivates you to perform well in this job?",
-        //         "Can you give an example of a successful project you completed?"
-        //     ]);
-        // } else {
-        //     setInterviewQuestions([]);
-        // }
     };
 
     return (
         <>
-            {/* <Head>
-                <title>Get Interview Questions | Ninja-Interviewer</title>
-            </Head> */}
             <Navbar />
             <main className="min-h-screen bg-gray-900 text-gray-200 py-8 px-4">
 
                 <div className="container mx-auto max-w-4xl">
-                    <h1 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 text-center">
-                        Get Your Personalized Interview Questions
-                    </h1>
+                    <h2 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 text-center">
+                        {username} - Get Your Personalized Interview Questions
+                    </h2>
+                    <p className='m-4'>
+                        Total Free Query Left - {queryLeft} <br /> 
+                        Subscribed to Premium - {isSubscribed? "Yes":"No"} 
+                    </p>
 
                     {/* md:grid-cols-2 */}
                     <div className="grid 
@@ -67,7 +64,7 @@ export default function GeneratePage() {
                         {/* Input Section */}
                         <section className="bg-gray-800 p-6 rounded-lg shadow-lg">
                             <h2 className="text-2xl font-semibold mb-4 text-yellow-400">
-                                Job Description
+                                Enter Job Description:
                             </h2>
                             <p className="text-gray-400 mb-4">
                                 {/* Enter the Job Description or JD to get relevant interview questions. <br /> */}

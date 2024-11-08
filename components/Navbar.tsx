@@ -2,11 +2,25 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { useSession, signOut } from 'next-auth/react';
+import { Button } from "@/components/ui/button"
+import { User } from "next-auth"
 
 
 
 export default function Navbar() {
     const [navOpen, setNavOpen] = useState(false);
+    const { data: session } = useSession()
+
+    // if (!session || !session.user) {
+    //     return <div className='bg-slate-600 m-4'>Please login</div>
+    // }
+    //show username feild link
+    // const { username, isSubscribed, queryLeft , _id} = session?.user as User
+    console.log('--from navbar.tsx.. data & status::', session);
+
+    //ts err - desolved by assertion
+    const user: User = session?.user as User
 
     const toggleNav = () => setNavOpen(!navOpen);
 
@@ -35,9 +49,24 @@ export default function Navbar() {
                 </nav>
 
                 {/* Get Started Button for Desktop */}
-                <Link href="/sign-up" className="hidden md:inline-block lg:ml-20 bg-yellow-500 text-gray-900 py-2 px-4 rounded-lg font-semibold hover:bg-yellow-400 transition">
-                    Sign up
-                </Link>
+
+                {session ?
+                    (
+                        <div>
+                            <span className="">Welcome,{user?.username || user?.email}</span>
+                            <Button onClick={() => signOut()}
+                                className="hidden md:inline-block lg:ml-20 bg-yellow-500 text-gray-900 py-2 px-4 rounded-lg font-semibold hover:bg-yellow-400 transition"
+                            //  className="w-full md:w-auto bg-slate-100 text-black" variant='outline'
+                            > Logout</Button>
+                        </div>
+
+                    )
+                    : (
+
+                        <Link href="/sign-in" className="hidden md:inline-block lg:ml-20 bg-yellow-500 text-gray-900 py-2 px-4 rounded-lg font-semibold hover:bg-yellow-400 transition">
+                            Sign in
+                        </Link>)
+                }
 
                 {/* Hamburger Icon for Mobile */}
                 <div className="md:hidden cursor-pointer" onClick={toggleNav}>
@@ -55,15 +84,23 @@ export default function Navbar() {
                     <Link href="/" className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
                         Home
                     </Link>
-                    <Link href="#features" className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
-                        Features
-                    </Link>
                     <Link href="get-my-questions" className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
                         Get Started
                     </Link>
                     <Link href="https://www.linkedin.com/in/sachinandanp5/" target='_blank' className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
                         Contact
                     </Link>
+                    {session ?
+                        (
+                            <Link href="/sign-up" className="block py-2 text-lg hover:text-yellow-400 transition"
+                                onClick={() => { signOut(), toggleNav }}>
+                                Logout
+                            </Link>
+
+                        ) :
+                        (
+                            null
+                        )}
                 </nav>
             )}
         </header>
