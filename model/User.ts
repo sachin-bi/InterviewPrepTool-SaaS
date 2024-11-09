@@ -55,7 +55,7 @@ const UserSchema: Schema<User> = new Schema({
   },
   queryLeft: {
     type: Number,
-    default: 5,
+    default: 4,
   },
   interactions: [InteractionSchema], // Using the defined InteractionSchema
 });

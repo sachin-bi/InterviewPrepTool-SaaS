@@ -3,7 +3,7 @@
 // import Link from 'next/link';
 // will not run without wrapper ... so made wrapper in context folder and wrraped layout with that
 
-'use client'
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"

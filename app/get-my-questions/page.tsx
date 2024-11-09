@@ -5,32 +5,51 @@
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
 // import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useSession } from "next-auth/react"
 import { User } from "next-auth"
 
 
 export default function GeneratePage() {
+    interface InterviewQuestion {
+        content: string;
+    }
 
     const [jobDescription, setJobDescription] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false)
     const [interviewQuestions, setInterviewQuestions] = useState<InterviewQuestion[]>([
         // {content: "Questions appear here!"}
     ]);
+    const [userDetails, setUserDetails] = useState<User>()
     const { data: session } = useSession()
 
     if (!session || !session.user) {
         return <div className='bg-slate-300 m-4'>Please login, or let ur session load</div>
     }
     //show username feild link
-    const { username, isSubscribed, queryLeft , _id} = session?.user as User
+    const { username, isSubscribed, queryLeft, _id } = session?.user as User
     //TODO: remove id if not used!
 
+    const getuserDetails = async () => {
+        const response = await axios.get(`/api/user-details?username=${username}`)
+        // console.log('---from current work', response);
 
-    interface InterviewQuestion {
-        content: string;
+        if (response.status === 200) {
+            setUserDetails(response.data.existingUser)
+        }
+        return
+
+
     }
+
+
+    useEffect(() => {
+
+        getuserDetails()
+
+    }, [])
+
 
 
 
@@ -54,8 +73,9 @@ export default function GeneratePage() {
                         {username} - Get Your Personalized Interview Questions
                     </h2>
                     <p className='m-4'>
-                        Total Free Query Left - {queryLeft} <br /> 
-                        Subscribed to Premium - {isSubscribed? "Yes":"No"} 
+                        Total Free Query Left - {userDetails?.queryLeft} <br />
+                        Subscribed to Premium - {userDetails?.isSubscribed ? "Yes" : "No"} <br />
+                        Your email - {userDetails?.email}
                     </p>
 
                     {/* md:grid-cols-2 */}
@@ -79,7 +99,7 @@ export default function GeneratePage() {
                                 rows={5}
                             />
                             <button
-                                onClick={handleGenerateQuestions}
+                                onClick={() => { handleGenerateQuestions(); getuserDetails(); }}
                                 className="w-full mt-4 bg-yellow-500 text-gray-900 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition duration-300"
                             >
                                 Get Questions

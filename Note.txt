@@ -17,8 +17,10 @@
 
 ## write the dependencies installed:
 8. npm installed -axios react-hook-form   usehooks-ts  shadcn@latest add form  shadcn@latest add form
-9. 
 
+
+9. get user details route is set and fetched in get my questions page
+10. todo - restrict the get questions btn if queryLeft == 0
 
 
 

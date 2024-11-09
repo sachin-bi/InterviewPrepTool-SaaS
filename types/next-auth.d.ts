@@ -6,6 +6,7 @@ declare module "next-auth" {
   interface User {
     _id?: string;
     username?: string;
+    email?: string; //TODO: look if error
     isSubscribed?: boolean;
     queryLeft?: number;
   }

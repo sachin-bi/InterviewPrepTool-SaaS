@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"; //if fb, gith
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-import { use } from "react";
+
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -80,6 +80,7 @@ export const authOptions: NextAuthOptions = {
 
   session: {
     strategy: "jwt",
+    maxAge: 3*60*60
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

@@ -17,7 +17,7 @@ export default function Navbar() {
     // }
     //show username feild link
     // const { username, isSubscribed, queryLeft , _id} = session?.user as User
-    console.log('--from navbar.tsx.. data & status::', session);
+    // console.log('--from navbar.tsx.. data & status::', session);
 
     //ts err - desolved by assertion
     const user: User = session?.user as User
