@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/sign-in",
   },
-
+  //login expiry set to 3hrs..
   session: {
     strategy: "jwt",
     maxAge: 3*60*60

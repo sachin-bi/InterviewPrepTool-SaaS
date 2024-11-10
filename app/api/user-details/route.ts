@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import UserModel from "@/model/User";
+import UserModel, { Interaction } from "@/model/User";
 import { z } from "zod";
 import { usernameValidation } from "@/schemas/signUpSchema";
 
@@ -7,6 +7,65 @@ const UsernameQuerySchema = z.object({
   username: usernameValidation,
 });
 
+export async function POST(request: Request) {
+  // const res = await axios.post("/api/user-details", { username, prompt: jobDescription , response:interviewQuestions })
+
+  await dbConnect();
+
+  const { username, prompt, response } = await request.json();
+
+  try {
+    const user = await UserModel.findOne({ username });
+    if (!user) {
+      return Response.json(
+        {
+          success: false,
+          message: "User not found",
+        },
+        { status: 404 }
+      );
+    }
+    if (user.queryLeft > 0) {
+      user.queryLeft = user.queryLeft - 1;
+    }
+    // const newInteraction = { prompt, response, createdAt: new Date() };
+    // Use Mongoose to create a new subdocument for interaction
+    // const newInteraction = user.interactions.create({
+    //   prompt,
+    //   response,
+    //   createdAt: new Date(),
+    // });
+    user.interactions.push({
+      prompt,
+      response,
+      createdAt: new Date(),
+    } as Interaction);
+    // user.interactions.push(newInteraction);
+
+    await user.save();
+
+    // console.log("New interaction added:",user.interactions[user.interactions.length - 1]);
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: "Interaction added successfully",
+      }),
+      { status: 200 }
+    );
+  } catch (err) {
+    console.log("---err from user-details. post::",err);
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: "An error occurred",
+      }),
+      { status: 500 }
+    );
+  }
+}
+
+// get the user details
 export async function GET(request: Request) {
   await dbConnect();
   try {

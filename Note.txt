@@ -20,7 +20,10 @@
 
 
 9. get user details route is set and fetched in get my questions page
-10. todo - restrict the get questions btn if queryLeft == 0
+10. restrict the get questions btn if queryLeft == 0
+11. route settings done to save to db - user's prompt + ai-response + updating queryLeft.
+
+11. TODO: create dashboard (to view : user details + previours prompt + previous prompts )
 
 
 

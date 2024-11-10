@@ -4,17 +4,25 @@
 // TODO: watch-out the return of this route
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import axios from "axios";
+
+//---------------------------------------------------work in  progress-------------------------------------------------------------
+// const updateDB = async ()=>{
+//     const res = await axios.post("/api/user-details", { username, prompt: jobDescription , response:interviewQuestions })
+// }
 
 export async function POST(request: Request) {
   try {
-    const {content} = await request.json();
+    const { content, username } = await request.json();
     // console.log("--be:content--",content);
-    
 
     const genAI = new GoogleGenerativeAI(process.env.GIMINI_API_KEY!);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = "This is job details starts with $$$ and ends with $$$: $$$" + {content} + "$$$  Create a list of ten questions formatted as a single string. Each question should be separated by '||'. These questions which might be asked in this interview , and should be suitable for this interview. Avoid sensitive topics, focusing instead on interview . For example, your output should be structured like this in single string: ' General:|| Tell us a little bit about yourself and your academic background.|| What are your career goals and why are you interested in P360?|| What are your biggest strengths and weaknesses?|| How do you stay up-to-date with new technologies in your field?|| Technical:|| Explain your understanding of basic SQL concepts.|| Briefly explain the concept of cloud computing.|| How would you approach solving a logical reasoning problem?|| Can you share an example of a puzzle or game you enjoy and why?|| Describe your comfort level with basic math operations.|| Behavioral:|| How do you communicate technical information to non-technical people?|| Describe a time you worked effectively in a team, especially when facing challenges or disagreements. ' Generate ten questions only, Ensure the questions are based on job details provided above.";
+    const prompt =
+      "This is job details starts with $$$ and ends with $$$: $$$" +
+      { content } +
+      "$$$  Create a list of ten questions formatted as a single string. Each question should be separated by '||'. These questions which might be asked in this interview , and should be suitable for this interview. Avoid sensitive topics, focusing instead on interview . For example, your output should be structured like this in single string: ' General:|| Tell us a little bit about yourself and your academic background.|| What are your career goals and why are you interested in P360?|| What are your biggest strengths and weaknesses?|| How do you stay up-to-date with new technologies in your field?|| Technical:|| Explain your understanding of basic SQL concepts.|| Briefly explain the concept of cloud computing.|| How would you approach solving a logical reasoning problem?|| Can you share an example of a puzzle or game you enjoy and why?|| Describe your comfort level with basic math operations.|| Behavioral:|| How do you communicate technical information to non-technical people?|| Describe a time you worked effectively in a team, especially when facing challenges or disagreements. ' Generate ten questions only, Ensure the questions are based on job details provided above.";
 
     const result = await model.generateContent(prompt);
 
@@ -49,6 +57,19 @@ export async function POST(request: Request) {
     const questionsObjectsArray = questionsArray.map((question) => ({
       content: question,
     }));
+
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000"}/api/user-details`;
+    const res = await axios.post(apiUrl, {
+      username,
+      prompt: content,
+      response: textSuggestions,
+    });
+
+    if (res.status != 200) {
+      console.log(
+        "---db not updated with this promt of user :: from suggest-questions route :: res",res
+      );
+    }
 
     return Response.json(
       {
