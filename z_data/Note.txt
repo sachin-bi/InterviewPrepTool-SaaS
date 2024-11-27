@@ -22,10 +22,13 @@
 9. get user details route is set and fetched in get my questions page
 10. restrict the get questions btn if queryLeft == 0
 11. route settings done to save to db - user's prompt + ai-response + updating queryLeft.
-12. created dashboard to view user details
-
-11. TODO: update dashboard (to view :  previous prompts )
-
 
  .. welcome to linux
+
+12. created dashboard to view user details
+13. TODO: update dashboard (to view :  previous prompts )
+
+
+
+
 
