@@ -32,6 +32,9 @@ Check out a live demo of Ninja-Interviewer (We will be live soon).
 ### Generated Interview Questions
 ![Generated Interview Questions](./screenshots/output.png)
 
+### User Dashboard
+![Dashboard](./z_data/ss_userDashboard.png)
+
 ---
 
 ## 🛠️ Tech Stack
@@ -40,6 +43,7 @@ Check out a live demo of Ninja-Interviewer (We will be live soon).
 - **Backend**: Node.js, TypeScript
 - **Database**: MongoDB 
 - **Authentication**: Next-Auth, Google, fb
+
 
 ---
 
