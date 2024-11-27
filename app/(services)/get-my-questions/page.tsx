@@ -23,6 +23,7 @@ export default function GeneratePage() {
     const [interviewQuestions, setInterviewQuestions] = useState<InterviewQuestion[]>([
         // {content: "Questions appear here!"}
     ]);
+
     const [userDetails, setUserDetails] = useState<User>()
     const { data: session } = useSession()
 
@@ -42,7 +43,7 @@ export default function GeneratePage() {
         }
 
         getuserDetails()
-        console.log("Run something")
+        console.log("Run something - Getting current user details from useEffect")
 
     }, [session])
 

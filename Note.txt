@@ -28,3 +28,9 @@
 
  .. welcome to linux
 
+  TODO: //look at get-my-questions = useEffect line 35:
+
+ReferenceError: Cannot access 'username' before initialization
+    at getuserDetails (webpack-internal:///(app-pages-browser)/./app/(services)/get-my-questions/page.tsx:32:123)
+    at eval (webpack-internal:///(app-pages-browser)/./app/(services)/get-my-questions/page.tsx:39:9)
+    at react-stack-bottom-frame (webpack-internal:///

@@ -41,7 +41,10 @@ export default function Navbar() {
                         Features
                     </Link>
                     <Link href="get-my-questions" className="hover:text-yellow-400 transition">
-                        Get Started
+                        Get-Started
+                    </Link>
+                    <Link href="dashboard" className="hover:text-yellow-400 transition">
+                        Dashboard
                     </Link>
                     <Link href="https://www.linkedin.com/in/sachinandanp5/" target="_blank" className="hover:text-yellow-400 transition">
                         Contact
@@ -85,7 +88,10 @@ export default function Navbar() {
                         Home
                     </Link>
                     <Link href="get-my-questions" className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
-                        Get Started
+                        Get-Started
+                    </Link>
+                    <Link href="dashboard" className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
+                        Dashboard
                     </Link>
                     <Link href="https://www.linkedin.com/in/sachinandanp5/" target='_blank' className="block py-2 text-lg hover:text-yellow-400 transition" onClick={toggleNav}>
                         Contact
