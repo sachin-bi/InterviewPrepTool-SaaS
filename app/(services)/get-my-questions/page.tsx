@@ -25,27 +25,55 @@ export default function GeneratePage() {
     ]);
 
     const [userDetails, setUserDetails] = useState<User>()
-    const { data: session } = useSession()
-
-
+    const { data: session , status} = useSession()
 
 
     useEffect(() => {
         const getuserDetails = async () => {
-            const response = await axios.get(`/api/user-details?username=${username}`)
-            // console.log('---from current work', response);
-
-            if (response.status === 200) {
-                setUserDetails(response.data.existingUser)
+            if (!session || !session.user) {
+                console.log("Session or user data is not available yet.");
+                return;
             }
-            return
+    
+            const { username } = session.user as User; // Safely destructure `username` here
+            if (!username) {
+                console.log("Username is not available.");
+                return;
+            }
+    
+            try {
+                const response = await axios.get(`/api/user-details?username=${username}`);
+                if (response.status === 200) {
+                    setUserDetails(response.data.existingUser);
+                }
+            } catch (error) {
+                console.error("(from useEffect- Error fetching user details:", error);
+            }
+        };
+    
+        getuserDetails();
+        console.log("Fetching user details if session is available...from useEffect");
+    }, [session]);
+    
 
-        }
+    // useEffect(() => {
+    //     const getuserDetails = async () => {
+    //         const response = await axios.get(`/api/user-details?username=${username}`)
+    //         // console.log('---from current work', response);
 
-        getuserDetails()
-        console.log("Run something - Getting current user details from useEffect")
+    //         if (response.status === 200) {
+    //             setUserDetails(response.data.existingUser)
+    //         }
+    //         return
 
-    }, [session])
+    //     }
+
+    //     getuserDetails()
+    //     console.log("Run something - Getting current user details from useEffect")
+
+    // }, [session,status])
+    
+
 
     if (!session || !session.user) {
         // return <div className='bg-slate-300 m-4'>Please login, or let ur session load</div>
@@ -70,7 +98,6 @@ export default function GeneratePage() {
             </div>
         );
     }
-
 
     //show username feild link
     const { username, isSubscribed, queryLeft, _id } = session?.user as User
