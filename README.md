@@ -24,13 +24,13 @@ Check out a live demo of Ninja-Interviewer (We will be live soon).
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](./screenshots/home.png)
+![Home Page](./z_data/home.png)
 
 ### Job Description Input
-![Job Description Input](./screenshots/input.png)
+![Job Description Input](./z_data/input.png)
 
 ### Generated Interview Questions
-![Generated Interview Questions](./screenshots/output.png)
+![Generated Interview Questions](./z_data/output.png)
 
 ### User Dashboard
 ![Dashboard](./z_data/ss_userDashboard.png)
