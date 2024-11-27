@@ -22,15 +22,10 @@
 9. get user details route is set and fetched in get my questions page
 10. restrict the get questions btn if queryLeft == 0
 11. route settings done to save to db - user's prompt + ai-response + updating queryLeft.
+12. created dashboard to view user details
 
-11. TODO: create dashboard (to view : user details + previours prompt + previous prompts )
+11. TODO: update dashboard (to view :  previous prompts )
 
 
  .. welcome to linux
 
-  TODO: //look at get-my-questions = useEffect line 35:
-
-ReferenceError: Cannot access 'username' before initialization
-    at getuserDetails (webpack-internal:///(app-pages-browser)/./app/(services)/get-my-questions/page.tsx:32:123)
-    at eval (webpack-internal:///(app-pages-browser)/./app/(services)/get-my-questions/page.tsx:39:9)
-    at react-stack-bottom-frame (webpack-internal:///
